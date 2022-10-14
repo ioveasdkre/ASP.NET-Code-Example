@@ -1,0 +1,34 @@
+﻿@model net6MVCCRUD.Models.InputModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div class="col-md-10 offset-1">
+    @*post 的方法傳送資料*@
+    <form asp-action="Index">
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-prepend" alt="驗證碼圖形" title="左鍵點擊，更換驗證碼" style="cursor: pointer;">
+                    <img id="img-captcha" src="@Url.Content("~/Certification/CaptchaAsync")" />
+                </div>
+                <input type="text" class="form-control" placeholder="請輸入驗證碼" asp-for="CaptchaCode" maxlength="4" />
+            </div>
+            <span asp-validation-for="CaptchaCode" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block">登入</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
